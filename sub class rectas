@@ -1,0 +1,121 @@
+//ejercicio sub class
+//autores: cristian rincon y julian ballesteros
+//asignatura: Alse grupo 2
+#include<iostream>
+using namespace std;
+
+	class punto // se crea la primera clase 
+{
+	protected: //se usaras valores de clase protected en donde solo se podran usar en sub clases o clase
+	float x1,y1,x2,y2,x3,y3,x4,y4;
+	float pen1,pen2;
+	float cruce_y1,cruce_y2; 
+	
+	public:  // en publico se haran las funciones respectivas que se usaran en el procedimiento
+	void pedir_puntos ()  // se pediran e ingresaran los valores de los puntos 
+	{
+	cout << "ingrese el primer punto de la recta 1\n"; //la funcion cout muestra al usuario el mensaje escrito
+	cout << "ingrese el valor de x\n"; 
+	cin >> x1;                                 //la funcion cin otorga al usuario asignar el valor que se quiera operar
+	cout << "ingrese el valor de y\n";
+	cin >> y1;
+	cout << "ingrese el segundo punto de la recta 1\n";
+	cout << "ingrese el valor de x\n";
+	cin >> x2;
+	cout << "ingrese el valor de y\n";
+	cin >> y2;
+	cout << "ingrese el primer punto de la recta 2\n";
+	cout << "ingrese el valor de x\n";
+	cin >> x3;
+	cout << "ingrese el valor de y\n";
+	cout << "ingrese el segundo punto de la recta 2\n";
+	cin >> y3;
+	cout << "ingrese el valor de x\n";
+	cin >> x4;
+	cout << "ingrese el valor de y\n";
+	cin >> y4;}
+};
+punto p1; //el apodo que se le da a la clase
+	
+	class operar : public punto   // se crea una sub clase en donde se cogeran valores de la clase que sean publicos o protegidos
+	
+	{
+     public:
+	void mostrar_puntos() // se mostrara los puntos respectivos de las rectas
+	{
+		cout << "los puntos de la primera recta son: " << x1 <<","<<y1<<" y "<<x2<<","<<y2<<"\n";
+		cout << "los puntos de la segunda recta son: " << x3 <<","<<y3<<" y "<<x4<<","<<y4<<"\n";
+		
+	}
+	
+	void pendiente ()// se calcula la pendiente de la recta
+	{
+	
+	pen1 = (y2-y1)/(x2-x1);
+	pen2 = (y4-y3)/(x4-x3);
+	//cout << pen1<<"\n";  // se imprimen las pendientes para saber si el procedimiento esta correcto
+	//cout << pen2<<"\n";
+	if (pen1 == pen2) // dado las pendientes se sabra si son perpendiculares o paralelas o ninguna de las dos 
+	{
+		cout << "las rectas son paralelas\n ";
+	}
+	else if (pen1*pen2==-1)
+	{
+	    cout << "las rectas son perpendiculares\n";
+	}
+	else 
+	{
+		cout << "las rectas no son paralelas ni perpendiculares\n";
+	}
+    }
+	
+	
+	
+	
+	void ecuacion_R() // funcion en donde se calculara la ecucion de cada recta
+	{
+	
+	cruce_y1 = (y1)-((pen1)*(x1)); // para hallar la ecuacion se necesita el punto de corte con el eje y
+	cruce_y2 = (y3)-((pen2)*(x3));
+	if (cruce_y1<0)    // dependiendo del cruce se imprime la respectiva ecuacion correspondiente de la recta
+	{
+	cout << "la ecuacion de la primera recta es: " "y="<<pen1<<"*x"<<cruce_y1<<"\n";
+    }
+	else
+	{
+	cout << "la ecuacion de la primera recta es: " "y="<<pen1<<"*x+"<<cruce_y1<<"\n";
+	}
+	if (cruce_y2<0)
+	{
+	cout << "la ecuacion de la primera recta es: " "y="<<pen2<<"*x"<<cruce_y2<<"\n";
+	}
+	else
+	{
+	cout << "la ecuacion de la primera recta es: " "y="<<pen2<<"*x+"<<cruce_y2<<"\n";
+    }
+    }
+	
+	void punto_de_corte()
+	{
+		
+	float x;
+	float y;
+	x = ((cruce_y1-cruce_y2)/(pen2-pen1));
+	//cout << x;
+	y = pen1*x+cruce_y1;
+	cout << "el punto de la interseccion de las rectas es: "<<x<<","<<y<<"\n";
+    
+	}
+    };
+operar op; // el apodo que se le da a la subclase de operaciones
+	
+
+int main() // menu principal
+{
+	op.pedir_puntos();
+	op.mostrar_puntos();
+	op.pendiente();
+	op.ecuacion_R();
+	op.punto_de_corte();
+}
+
